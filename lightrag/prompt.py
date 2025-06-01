@@ -10,23 +10,9 @@ PROMPTS["DEFAULT_TUPLE_DELIMITER"] = "<|>"
 PROMPTS["DEFAULT_RECORD_DELIMITER"] = "##"
 PROMPTS["DEFAULT_COMPLETION_DELIMITER"] = "<|COMPLETE|>"
 
-PROMPTS["DEFAULT_ENTITY_TYPES"] = [
-    "organization",     # entreprises, institutions
-    "person",           # dirigeants, analystes, investisseurs
-    "geo",              # pays, régions
-    "event",            # fusions, acquisitions, crises
-    "category",         # types de produits ou d'actifs
-    "financial_instrument",   # actions, obligations, ETF, dérivés
-    "metric",                 # chiffre d'affaires, EBITDA, P/E ratio
-    "regulation",             # normes comptables, directives ESG
-    "economic_indicator",     # inflation, taux d’intérêt, PIB
-    "market_index",           # CAC 40, S&P 500, NASDAQ
-    "risk_factor",            # volatilité, risque de crédit
-    "currency",               # USD, EUR, taux de change
-    "sector",                 # énergie, santé, finance, tech
-    "rating",                 # notation de crédit (ex : AA+, BBB-)
-    "contractual_term"        # clause de non-concurrence, échéance
-]
+PROMPTS["DEFAULT_ENTITY_TYPES"] = ["organization", "person", "geo", "event", "category", "financial_instrument", "metric",
+                                   "regulation", "economic_indicator", "market_index", "risk_factor", "currency", "sector", "rating", "contractual_term"]
+
 
 PROMPTS["DEFAULT_USER_PROMPT"] = "n/a"
 
@@ -72,32 +58,30 @@ Text:
 Output:"""
 
 PROMPTS["entity_extraction_examples"] = [
-    """Example 1:
+    """Example – Domaine financier :
 
-Entity_types: [person, technology, mission, organization, location]
+Entity_types: [organization, person, financial_instrument, metric, economic_indicator]
 Text:
 ```
-while Alex clenched his jaw, the buzz of frustration dull against the backdrop of Taylor's authoritarian certainty. It was this competitive undercurrent that kept him alert, the sense that his and Jordan's shared commitment to discovery was an unspoken rebellion against Cruz's narrowing vision of control and order.
-
-Then Taylor did something unexpected. They paused beside Jordan and, for a moment, observed the device with something akin to reverence. "If this tech can be understood..." Taylor said, their voice quieter, "It could change the game for us. For all of us."
-
-The underlying dismissal earlier seemed to falter, replaced by a glimpse of reluctant respect for the gravity of what lay in their hands. Jordan looked up, and for a fleeting heartbeat, their eyes locked with Taylor's, a wordless clash of wills softening into an uneasy truce.
-
-It was a small transformation, barely perceptible, but one that Alex noted with an inward nod. They had all been brought here by different paths
+Lors de la conférence trimestrielle, Marie Dupont, directrice financière de SociétéX, a annoncé que le chiffre d'affaires avait atteint 2,5 milliards d'euros au deuxième trimestre 2024, 
+dépassant les prévisions de 10 %. Elle a souligné que la performance était favorisée par la hausse du cours de l’action SociétéX (+15 %) et par la forte demande sur le marché de l’énergie renouvelable. 
+Le PDG, Alain Bernard, a ajouté que la dette nette avait été réduite de 20 %, grâce à l’émission d’obligations vertes d’un montant de 500 millions d’euros. Le taux d’inflation à 3,2 % en avril 2024 a néanmoins freiné une partie de la croissance.
 ```
 
+
 Output:
-("entity"{tuple_delimiter}"Alex"{tuple_delimiter}"person"{tuple_delimiter}"Alex is a character who experiences frustration and is observant of the dynamics among other characters."){record_delimiter}
-("entity"{tuple_delimiter}"Taylor"{tuple_delimiter}"person"{tuple_delimiter}"Taylor is portrayed with authoritarian certainty and shows a moment of reverence towards a device, indicating a change in perspective."){record_delimiter}
-("entity"{tuple_delimiter}"Jordan"{tuple_delimiter}"person"{tuple_delimiter}"Jordan shares a commitment to discovery and has a significant interaction with Taylor regarding a device."){record_delimiter}
-("entity"{tuple_delimiter}"Cruz"{tuple_delimiter}"person"{tuple_delimiter}"Cruz is associated with a vision of control and order, influencing the dynamics among other characters."){record_delimiter}
-("entity"{tuple_delimiter}"The Device"{tuple_delimiter}"technology"{tuple_delimiter}"The Device is central to the story, with potential game-changing implications, and is revered by Taylor."){record_delimiter}
-("relationship"{tuple_delimiter}"Alex"{tuple_delimiter}"Taylor"{tuple_delimiter}"Alex is affected by Taylor's authoritarian certainty and observes changes in Taylor's attitude towards the device."{tuple_delimiter}"power dynamics, perspective shift"{tuple_delimiter}7){record_delimiter}
-("relationship"{tuple_delimiter}"Alex"{tuple_delimiter}"Jordan"{tuple_delimiter}"Alex and Jordan share a commitment to discovery, which contrasts with Cruz's vision."{tuple_delimiter}"shared goals, rebellion"{tuple_delimiter}6){record_delimiter}
-("relationship"{tuple_delimiter}"Taylor"{tuple_delimiter}"Jordan"{tuple_delimiter}"Taylor and Jordan interact directly regarding the device, leading to a moment of mutual respect and an uneasy truce."{tuple_delimiter}"conflict resolution, mutual respect"{tuple_delimiter}8){record_delimiter}
-("relationship"{tuple_delimiter}"Jordan"{tuple_delimiter}"Cruz"{tuple_delimiter}"Jordan's commitment to discovery is in rebellion against Cruz's vision of control and order."{tuple_delimiter}"ideological conflict, rebellion"{tuple_delimiter}5){record_delimiter}
-("relationship"{tuple_delimiter}"Taylor"{tuple_delimiter}"The Device"{tuple_delimiter}"Taylor shows reverence towards the device, indicating its importance and potential impact."{tuple_delimiter}"reverence, technological significance"{tuple_delimiter}9){record_delimiter}
-("content_keywords"{tuple_delimiter}"power dynamics, ideological conflict, discovery, rebellion"){completion_delimiter}
+("entity"{tuple_delimiter}"Marie Dupont"{tuple_delimiter}"person"{tuple_delimiter}"Directrice financière de SociétéX ayant communiqué les résultats trimestriels."){record_delimiter}
+("entity"{tuple_delimiter}"SociétéX"{tuple_delimiter}"organization"{tuple_delimiter}"Entreprise cotée opérant dans le secteur de l’énergie renouvelable."){record_delimiter}
+("entity"{tuple_delimiter}"3,2 %"{tuple_delimiter}"economic_indicator"{tuple_delimiter}"Taux d’inflation enregistré en avril 2024, impactant la croissance."){record_delimiter}
+("entity"{tuple_delimiter}"action SociétéX"{tuple_delimiter}"financial_instrument"{tuple_delimiter}"Action cotée dont la valeur a augmenté de 15 % durant le trimestre."){record_delimiter}
+("entity"{tuple_delimiter}"obligations vertes"{tuple_delimiter}"financial_instrument"{tuple_delimiter}"Instruments de dette émis à hauteur de 500 millions d’euros pour financer des projets durables."){record_delimiter}
+("relationship"{tuple_delimiter}"Marie Dupont"{tuple_delimiter}"SociétéX"{tuple_delimiter}"Marie Dupont annonce les résultats financiers de la société, reflétant une croissance de 10 %. "{tuple_delimiter}"communication financière, performance"{tuple_delimiter}7){record_delimiter}
+("relationship"{tuple_delimiter}"SociétéX"{tuple_delimiter}"action SociétéX"{tuple_delimiter}"La performance de la société est corrélée à la hausse de son action de 15 %. "{tuple_delimiter}"valeur de l’actif, performance boursière"{tuple_delimiter}8){record_delimiter}
+("relationship"{tuple_delimiter}"SociétéX"{tuple_delimiter}"obligations vertes"{tuple_delimiter}"Émission de 500 millions d’euros d’obligations vertes pour réduire la dette nette de 20 %. "{tuple_delimiter}"financement durable, réduction de dette"{tuple_delimiter}6){record_delimiter}
+("relationship"{tuple_delimiter}"3,2 %"{tuple_delimiter}"croissance"{tuple_delimiter}"Le taux d’inflation de 3,2 % a freiné partiellement la croissance de la société. "{tuple_delimiter}"impact macroéconomique"{tuple_delimiter}5){record_delimiter}
+"""
+]
+
 #############################""",
     """Example 2:
 
