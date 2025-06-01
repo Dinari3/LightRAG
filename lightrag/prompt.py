@@ -5,12 +5,28 @@ GRAPH_FIELD_SEP = "<SEP>"
 
 PROMPTS: dict[str, Any] = {}
 
-PROMPTS["DEFAULT_LANGUAGE"] = "English"
+PROMPTS["DEFAULT_LANGUAGE"] = "French"
 PROMPTS["DEFAULT_TUPLE_DELIMITER"] = "<|>"
 PROMPTS["DEFAULT_RECORD_DELIMITER"] = "##"
 PROMPTS["DEFAULT_COMPLETION_DELIMITER"] = "<|COMPLETE|>"
 
-PROMPTS["DEFAULT_ENTITY_TYPES"] = ["organization", "person", "geo", "event", "category"]
+PROMPTS["DEFAULT_ENTITY_TYPES"] = [
+    "organization",     # entreprises, institutions
+    "person",           # dirigeants, analystes, investisseurs
+    "geo",              # pays, régions
+    "event",            # fusions, acquisitions, crises
+    "category",         # types de produits ou d'actifs
+    "financial_instrument",   # actions, obligations, ETF, dérivés
+    "metric",                 # chiffre d'affaires, EBITDA, P/E ratio
+    "regulation",             # normes comptables, directives ESG
+    "economic_indicator",     # inflation, taux d’intérêt, PIB
+    "market_index",           # CAC 40, S&P 500, NASDAQ
+    "risk_factor",            # volatilité, risque de crédit
+    "currency",               # USD, EUR, taux de change
+    "sector",                 # énergie, santé, finance, tech
+    "rating",                 # notation de crédit (ex : AA+, BBB-)
+    "contractual_term"        # clause de non-concurrence, échéance
+]
 
 PROMPTS["DEFAULT_USER_PROMPT"] = "n/a"
 
